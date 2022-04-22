@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Weather.Views.ForecastPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Button Text="Refresh" HorizontalOptions="Fill" Clicked="Button_Clicked"></Button>
+            <ActivityIndicator x:Name="ActivityIndicator" Color="CadetBlue" VerticalOptions="CenterAndExpand" HorizontalOptions="Fill" IsVisible="false"/>
+
+            <ListView x:Name="ForecastListView" IsGroupingEnabled="true" HasUnevenRows="true" ItemsSource="{Binding GroupedForecast}">
+                <ListView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <ViewCell Height="30">
+                            <StackLayout HorizontalOptions="FillAndExpand" HeightRequest="30" 
+                                     Padding="5" Orientation="Horizontal">
+                                <Label FontSize="20" TextColor="CornflowerBlue" VerticalOptions="Center" Text="{Binding Key, StringFormat='{}{0:dddd, MMMM dd, yyyy}'}" HeightRequest="30" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.GroupHeaderTemplate>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Margin="10, 0, 0, 0">
+                                <Label Text="{Binding DateTime, StringFormat='{}{0:h\:mm tt}'}" FontAttributes="Bold"/>
+                                <Label Text="{Binding .}" Margin="0, 0, 0, 30" TextColor="DarkGray"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
